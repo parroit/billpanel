@@ -1,0 +1,48 @@
+{
+  "name": "billpanel",
+  "description": "",
+  "version": "0.1.0",
+  "homepage": "https://github.com//billpanel",
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com//billpanel.git"
+  },
+  "bugs": {
+    "url": "https://github.com//billpanel/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com//billpanel/blob/master/LICENSE"
+    }
+  ],
+  "main": "lib/billpanel",
+  "engines": {
+    "node": ">= 0.10.26",
+    "npm": ">=1.4.3"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "react-tools": "^0.10.0",
+    "envify": "^1.2.1",
+    "react": "^0.10.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0",
+    "chai": "~1.8.0",
+    "gulp": "~3.6.0",
+    "gulp-mocha": "~0.4.1",
+    "gulp-load-plugins": "^0.5.1",
+    "gulp-browserify": "^0.5.0",
+    "reactify": "^0.13.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-serve": "^0.2.0"
+  },
+  "keywords": []
+}
