@@ -1,11 +1,3 @@
-/*
- * billpanel
- * https://github.com//billpanel
- *
- * Copyright (c) 2014
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 var gulp = require('gulp');
@@ -14,10 +6,19 @@ var $ = loadPlugins({
     lazy: true
 });
 
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
 
-// Copy all static images
-gulp.task('test', ['build'], function() {
-    return gulp.src('./test/*.js')
+
+gulp.task('compile-react', function() {
+    return gulp.src(['./lib/**/*.js', './test/**/*.js'], {base: '.'})
+        .pipe($.react())
+        .pipe(gulp.dest('reactified'));
+});
+
+
+gulp.task('test', ['compile-react'], function() {
+    return gulp.src(['./reactified/test/**/*.js'])
         .pipe($.mocha({
             globals: ['chai'],
             timeout: 6000,
@@ -27,23 +28,35 @@ gulp.task('test', ['build'], function() {
         }));
 });
 
-gulp.task('build', function() {
-    return gulp.src('./lib/billpanel.js')
-        .pipe($.browserify({
-            transform: ['reactify'],
-            debug: true
-        }))
-        .pipe($.rename('index.js'))
-        .pipe(gulp.dest('web'));
+gulp.task('browserify', function() {
+    var b = browserify('./lib/app.js');
+    b.transform('reactify');
+    b.external('react');
+    return b
+        .bundle()
+        .pipe(source('index.js'))
+        .pipe(gulp.dest('web/js'));
+});
+
+
+
+gulp.task('vendor', function() {
+    var b = browserify('react');
+    b.require('react');
+    return b
+        .bundle()
+        .pipe(source('vendor.js'))
+        .pipe(gulp.dest('web/js'));
+
 });
 
 
 gulp.task('watch-test', function() {
-    gulp.watch(['./lib/**/*.js', './test/**/*.js'], ['test']);
+    return gulp.watch(['./lib/**/*.js', './test/**/*.js'], ['test']);
 });
 
-gulp.task('watch-build', function() {
-    gulp.watch(['./lib/**/*.js'], ['build']);
+gulp.task('watch-browserify', function() {
+    return gulp.watch(['./lib/**/*.js'], ['browserify']);
 });
 
-gulp.task('serve',['watch-build'], $.serve('web'));
+gulp.task('serve',['watch-browserify'], $.serve('web'));

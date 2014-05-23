@@ -14,11 +14,10 @@ chai.should();
 
 var billpanel = require('../lib/billpanel.js');
 
-
 describe('billpanel module', function(){
   describe('#awesome()', function(){
     it('should return a hello', function(){
-      billpanel.awesome('livia').should.equal('hello livia');
+      billpanel.initialize.should.be.a('function');
     });
   });
 });
