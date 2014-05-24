@@ -34,10 +34,7 @@
     "react": "^0.10.0"
   },
   "devDependencies": {
-    "mocha": "~1.10.0",
-    "chai": "~1.8.0",
     "gulp": "~3.6.0",
-    "gulp-mocha": "~0.4.1",
     "gulp-load-plugins": "^0.5.1",
     "gulp-browserify": "^0.5.0",
     "reactify": "^0.13.1",
@@ -45,7 +42,10 @@
     "gulp-serve": "^0.2.0",
     "vinyl-source-stream": "^0.1.1",
     "browserify": "^4.1.5",
-    "gulp-react": "^0.3.3"
+    "gulp-react": "^0.3.3",
+    "gulp-clean": "^0.2.4",
+    "gulp-mocha-phantomjs": "^0.2.1",
+    "chai": "^1.9.1"
   },
   "keywords": []
 }

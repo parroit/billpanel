@@ -10,22 +10,23 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 
 
-gulp.task('compile-react', function() {
-    return gulp.src(['./lib/**/*.js', './test/**/*.js'], {base: '.'})
-        .pipe($.react())
-        .pipe(gulp.dest('reactified'));
+
+
+gulp.task('test', ['browserify-test'], function() {
+    return gulp.src(['./web/runner.html' ])
+        .pipe($.mochaPhantomjs());
 });
 
-
-gulp.task('test', ['compile-react'], function() {
-    return gulp.src(['./reactified/test/**/*.js'])
-        .pipe($.mocha({
-            globals: ['chai'],
-            timeout: 6000,
-            ignoreLeaks: false,
-            ui: 'bdd',
-            reporter: 'spec'
-        }));
+gulp.task('browserify-test', function() {
+    var b = browserify('./test/billpanel_test.js');
+    b.transform('reactify');
+    b.external('react');
+    return b
+        .bundle({
+            insertGlobals: true
+        })
+        .pipe(source('test.js'))
+        .pipe(gulp.dest('web/js'));
 });
 
 gulp.task('browserify', function() {
@@ -33,7 +34,9 @@ gulp.task('browserify', function() {
     b.transform('reactify');
     b.external('react');
     return b
-        .bundle()
+        .bundle({
+            insertGlobals: true
+        })
         .pipe(source('index.js'))
         .pipe(gulp.dest('web/js'));
 });
@@ -44,7 +47,9 @@ gulp.task('vendor', function() {
     var b = browserify('react');
     b.require('react');
     return b
-        .bundle()
+        .bundle({
+            insertGlobals: true
+        })
         .pipe(source('vendor.js'))
         .pipe(gulp.dest('web/js'));
 
