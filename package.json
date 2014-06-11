@@ -31,7 +31,14 @@
   "dependencies": {
     "react-tools": "^0.10.0",
     "envify": "^1.2.1",
-    "react": "^0.10.0"
+    "react": "^0.10.0",
+    "jquery": "^2.1.1",
+    "couch-promise": "^0.3.0",
+    "react-bootstrap": "^0.10.1",
+    "moment": "^2.6.0",
+    "d3": "^3.4.8",
+    "underscore": "^1.6.0",
+    "nchart": "^0.1.6"
   },
   "devDependencies": {
     "gulp": "~3.6.0",

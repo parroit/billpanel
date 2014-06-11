@@ -2,5 +2,6 @@ node_modules
 web/js/*
 *.sublime-workspace
 *.log
+config.*
 .DS_Store
 reactified

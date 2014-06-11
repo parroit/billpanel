@@ -9,11 +9,19 @@ var $ = loadPlugins({
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 
-
+var vendorLibs = [
+    'react',
+    'jquery',
+    'couch-promise',
+    'react-bootstrap',
+    'moment',
+    'underscore',
+    'nchart'
+];
 
 
 gulp.task('test', ['browserify-test'], function() {
-    return gulp.src(['./web/runner.html' ])
+    return gulp.src(['./web/runner.html'])
         .pipe($.mochaPhantomjs());
 });
 
@@ -32,7 +40,11 @@ gulp.task('browserify-test', function() {
 gulp.task('browserify', function() {
     var b = browserify('./lib/app.js');
     b.transform('reactify');
-    b.external('react');
+    vendorLibs.forEach(function(lib) {
+        b.external(lib);
+    });
+
+
     return b
         .bundle({
             insertGlobals: true
@@ -44,8 +56,11 @@ gulp.task('browserify', function() {
 
 
 gulp.task('vendor', function() {
-    var b = browserify('react');
-    b.require('react');
+    var b = browserify(vendorLibs);
+    vendorLibs.forEach(function(lib) {
+        b.require(lib);
+    });
+
     return b
         .bundle({
             insertGlobals: true
@@ -64,4 +79,4 @@ gulp.task('watch-browserify', function() {
     return gulp.watch(['./lib/**/*.js'], ['browserify']);
 });
 
-gulp.task('serve',['watch-browserify'], $.serve('web'));
+gulp.task('serve', ['browserify', 'watch-browserify'], $.serve('web'));
