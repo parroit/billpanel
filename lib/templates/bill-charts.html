@@ -1,0 +1,31 @@
+<div>
+    <Panel header="Top 5 customer by quarters">
+        <Row>
+
+            <Col md={10}>
+                <LineChart data={args.top5ByQuarter.data} options={args.optionsTop5ByQuarter} />
+            </Col>
+
+
+            <Col md={2}>
+                { args.top5ByQuarter.legend.map(function(item){ return (
+                <p style={{color: item.color}}>
+                    {item.customer}
+                </p>
+                ); }) }
+            </Col>
+
+        </Row>
+    </Panel>
+
+    <Panel header="Totals by quarters">
+        <Row>
+
+            <Col md={12}>
+                <LineChart data={args.byQuarter} options={args.optionsByQuarter} />
+            </Col>
+
+
+        </Row>
+    </Panel>
+</div>

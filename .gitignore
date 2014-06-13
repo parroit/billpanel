@@ -1,5 +1,6 @@
 node_modules
 web/js/*
+lib/built-templates
 *.sublime-workspace
 *.log
 config.*

@@ -1,0 +1,8 @@
+ (args.busy ?
+   <div className="wait-panel">
+   <h4> Loading data, please wait </h4>
+    <Spinner/> 
+    </div> 
+:
+    <BillsTabs bills={args.bills}/> 
+)

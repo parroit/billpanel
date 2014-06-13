@@ -53,6 +53,29 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('web/js'));
 });
 
+gulp.task('jsxify', function() {
+
+    return gulp.src('./lib/templates/**/*.html')
+        .pipe($.jsxify({
+            requires: {
+                Row: 'react-bootstrap/Row',
+                Col: 'react-bootstrap/Col',
+                Panel: 'react-bootstrap/Panel',
+                Table: 'react-bootstrap/Table',
+                TabbedArea: 'react-bootstrap/TabbedArea',
+                TabPane: 'react-bootstrap/TabPane',
+                LineChart: '../LineChart',
+                TotalsTable: '../TotalsTable',
+                BillsTable: '../BillsTable',
+                BillsTotals: '../BillsTotals',
+                BillCharts: '../BillCharts',
+                BillsTabs: '../BillsTabs',
+                Spinner: '../Spinner'
+            }
+        }))
+        .pipe($.react())
+        .pipe(gulp.dest('./lib/built-templates'));
+});
 
 
 gulp.task('vendor', function() {
@@ -78,5 +101,10 @@ gulp.task('watch-test', function() {
 gulp.task('watch-browserify', function() {
     return gulp.watch(['./lib/**/*.js'], ['browserify']);
 });
+
+gulp.task('watch-jsxify', function() {
+    return gulp.watch(['./lib/templates/**/*.html'], ['jsxify']);
+});
+
 
 gulp.task('serve', ['browserify', 'watch-browserify'], $.serve('web'));

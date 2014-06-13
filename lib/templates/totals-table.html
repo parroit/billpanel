@@ -1,0 +1,17 @@
+<Col xs={12} md={4}>
+    <Panel header={args.caption}>
+        <Table responsive striped bordered condensed hover>
+            <thead>
+                <tr>
+                    <th>{args.groupName}</th>
+                    <th>Total</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {args.data}
+            </tbody>
+        </Table>
+    </Panel>
+</Col>
