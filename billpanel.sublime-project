@@ -12,6 +12,14 @@
 		{
 			"follow_symlinks": true,
 			"path": "/home/parroit/src/cautionem"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/parroit/Scrivania/repositories/gulp-jsxify"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/parroit/Scrivania/repositories/parroit.github.com"
 		}
 	]
 }

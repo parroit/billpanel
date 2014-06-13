@@ -16,7 +16,8 @@ var vendorLibs = [
     'react-bootstrap',
     'moment',
     'underscore',
-    'nchart'
+    'nchart',
+    'ramda'
 ];
 
 
@@ -26,7 +27,7 @@ gulp.task('test', ['browserify-test'], function() {
 });
 
 gulp.task('browserify-test', function() {
-    var b = browserify('./test/billpanel_test.js');
+    var b = browserify('./test/groupBills_test.js');
     vendorLibs.forEach(function(lib) {
         b.external(lib);
     });
