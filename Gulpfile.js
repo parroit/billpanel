@@ -27,8 +27,10 @@ gulp.task('test', ['browserify-test'], function() {
 
 gulp.task('browserify-test', function() {
     var b = browserify('./test/billpanel_test.js');
-    b.transform('reactify');
-    b.external('react');
+    vendorLibs.forEach(function(lib) {
+        b.external(lib);
+    });
+
     return b
         .bundle({
             insertGlobals: true
@@ -39,7 +41,6 @@ gulp.task('browserify-test', function() {
 
 gulp.task('browserify', function() {
     var b = browserify('./lib/app.js');
-    b.transform('reactify');
     vendorLibs.forEach(function(lib) {
         b.external(lib);
     });
