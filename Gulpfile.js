@@ -5,7 +5,7 @@ var loadPlugins = require('gulp-load-plugins');
 var $ = loadPlugins({
     lazy: true
 });
-
+var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 
@@ -20,11 +20,16 @@ var vendorLibs = [
     'ramda'
 ];
 
-
-gulp.task('test', ['browserify-test'], function() {
+function testMochaPhantom() {
     return gulp.src(['./web/runner.html'])
         .pipe($.mochaPhantomjs());
-});
+}
+
+
+gulp.task('test', ['browserify-test'], testMochaPhantom);
+gulp.task('testMochaPhantom', testMochaPhantom);
+
+
 
 gulp.task('browserify-test', function() {
     var b = browserify('./test/groupBills_test.js');
@@ -32,10 +37,17 @@ gulp.task('browserify-test', function() {
         b.external(lib);
     });
 
-    return b
+    var bundle = b
         .bundle({
             insertGlobals: true
-        })
+        });
+    
+    bundle.on('error',function(err){
+        gutil.log(err);
+        bundle.end();
+    });
+
+    return bundle
         .pipe(source('test.js'))
         .pipe(gulp.dest('web/js'));
 });
@@ -96,8 +108,9 @@ gulp.task('vendor', function() {
 });
 
 
-gulp.task('watch-test', function() {
-    return gulp.watch(['./lib/**/*.js', './test/**/*.js'], ['test']);
+gulp.task('watch-test', ['test'] ,function() {
+    gulp.watch(['./lib/**/*.js', './test/**/*.js'], ['browserify-test']);
+    gulp.watch(['./web/js/test.js'], ['testMochaPhantom']);
 });
 
 gulp.task('watch-browserify', function() {
