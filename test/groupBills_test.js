@@ -42,6 +42,7 @@ describe('groupBills module', function() {
 
     });
 
+    
     describe('byQuarter', function() {
 
         it('is a function', function() {
