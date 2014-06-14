@@ -83,7 +83,6 @@ describe('groupBills module', function() {
 
         it('return quarter by 1 of firstYear', function() {
             var result = this.byCustomerQuarter(exampleData[8] /*date: 25/4/2009,customer: 'Digital Studio'*/ );
-
             result.should.be.equal('Digital Studio|6');
         });
 
