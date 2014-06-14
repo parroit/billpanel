@@ -1,2 +1,2 @@
-require('./groupBills_test');
+require('./groupRows_test');
 require('./model_test');

@@ -12,17 +12,84 @@ var chai = require('chai');
 chai.expect();
 chai.should();
 
-var model = require('../lib/groupBills');
 var moment = require('moment');
-
-var exampleData = require('./exampleData');
 var model = require('../lib/model');
+var exampleData = require('./exampleData');
+var groupByYear = model.groupReduceSort(function(b) {
+
+    return b.data.year();
+}, null);
 
 
 describe('model module', function() {
     it('expose a function', function() {
         model.should.be.a('object');
     });
+
+    describe('groupReduceSort', function() {
+        it('group bills by given function', function() {
+
+            var result = groupByYear(exampleData);
+
+            result.should.be.deep.equal([{
+                group: 2008,
+                tot: 7730.5,
+                count: 7
+            }, {
+                group: 2009,
+                tot: 10110.5,
+                count: 5
+            }]);
+        });
+
+    });
+
+
+    describe('byQuarter', function() {
+
+        it('is a function', function() {
+            model.byQuarter.should.be.a('function');
+        });
+
+        before(function() {
+            this.byQuarter2008 = model.byQuarter(2008);
+        });
+
+
+        it('is curried', function() {
+            this.byQuarter2008.should.be.a('function');
+        });
+
+        it('return quarter by 1 of firstYear', function() {
+            var result = this.byQuarter2008(exampleData[8] /*date: 25/4/2009*/ );
+
+            result.should.be.equal(6);
+        });
+
+    });
+
+    describe('byCustomerQuarter', function() {
+
+        it('is a function', function() {
+            model.byCustomerQuarter.should.be.a('function');
+        });
+
+        before(function() {
+            this.byCustomerQuarter = model.byCustomerQuarter(2008);
+        });
+
+
+        it('is curried', function() {
+            this.byQuarter2008.should.be.a('function');
+        });
+
+        it('return quarter by 1 of firstYear', function() {
+            var result = this.byCustomerQuarter(exampleData[8] /*date: 25/4/2009,customer: 'Digital Studio'*/ );
+            result.should.be.equal('Digital Studio|6');
+        });
+
+    });
+
     describe('datePart', function() {
 
         it('is a function', function() {
@@ -48,9 +115,9 @@ describe('model module', function() {
     });
 
     describe('reindexArray', function() {
-       before(function() {
-            this.reindexArrayByGroup = model.reindexArray(function idxPicker(obj){
-                return obj.group -1;
+        before(function() {
+            this.reindexArrayByGroup = model.reindexArray(function idxPicker(obj) {
+                return obj.group - 1;
             }, model.emptyGroup);
         });
 
@@ -79,7 +146,7 @@ describe('model module', function() {
                 group: 2,
                 tot: 0,
                 count: 0
-            },{
+            }, {
                 group: 3,
                 tot: 500,
                 count: 1
@@ -90,7 +157,7 @@ describe('model module', function() {
 
 
     describe('groupByQuarter', function() {
-       
+
 
         it('group bills by quarter', function() {
 
