@@ -32,7 +32,7 @@ gulp.task('testMochaPhantom', testMochaPhantom);
 
 
 gulp.task('browserify-test', function() {
-    var b = browserify('./test/groupBills_test.js');
+    var b = browserify('./test/billpanel_test.js');
     vendorLibs.forEach(function(lib) {
         b.external(lib);
     });

@@ -15,11 +15,11 @@
 		},
 		{
 			"follow_symlinks": true,
-			"path": "/home/parroit/Scrivania/repositories/gulp-jsxify"
+			"path": "/home/parroit/Scrivania/repositories/parroit.github.com"
 		},
 		{
 			"follow_symlinks": true,
-			"path": "/home/parroit/Scrivania/repositories/parroit.github.com"
+			"path": "/home/parroit/Scrivania/repositories"
 		}
 	]
 }

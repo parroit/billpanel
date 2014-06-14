@@ -14,7 +14,6 @@ chai.should();
 
 var groupBills = require('../lib/groupBills');
 var exampleData = require('./exampleData');
-
 var groupByYear = groupBills.groupReduceSort(function(b) {
 
     return b.data.year();
@@ -23,7 +22,7 @@ var groupByYear = groupBills.groupReduceSort(function(b) {
 
 describe('groupBills module', function() {
     it('expose a function', function() {
-        groupBills.should.be.a('function');
+        groupBills.should.be.a('object');
     });
     describe('groupReduceSort', function() {
         it('group bills by given function', function() {
@@ -103,4 +102,8 @@ describe('groupBills module', function() {
         });
 
     });
+     
+    
+
+    
 });
