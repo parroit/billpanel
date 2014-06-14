@@ -1,0 +1,12 @@
+<tr key={args.code} style={{backgroundColor: args.gravity}}>
+    <td style={{backgroundColor: args.gravity}}>{args.code}</td>
+    <td style={{backgroundColor: args.gravity}} className="date">{args.data.format("DD/MM/YYYY")}</td>
+
+    <td style={{backgroundColor: args.gravity}}>{args.customer}</td>
+    <td style={{backgroundColor: args.gravity}}>{args.pagamento}</td>
+    <td style={{backgroundColor: args.gravity}} className="date">{args.dueDate.format("DD/MM/YYYY")}</td>
+    <td style={{backgroundColor: args.gravity}}>{args.status}</td>
+	<td style={{backgroundColor: args.gravity}}>
+		<SetPayed code={args.code}/>
+	</td>
+</tr>

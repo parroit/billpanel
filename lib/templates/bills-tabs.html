@@ -1,14 +1,18 @@
 <TabbedArea defaultActiveKey={1}>
     
-    <TabPane key={1} tab="Totals">
+    <TabPane key={1} tab="Status">
+        <Status bills={args.bills}/>
+    </TabPane>
+
+    <TabPane key={2} tab="Totals">
         <BillsTotals bills={args.bills}/>
     </TabPane>
 
-    <TabPane key={2} tab="All bills">
+    <TabPane key={3} tab="All bills">
         <BillsTable bills={args.bills}/>
     </TabPane>
     
-    <TabPane key={3} tab="Charts">
+    <TabPane key={4} tab="Charts">
 
         <BillCharts bills={args.bills} />
 

@@ -78,12 +78,15 @@ gulp.task('jsxify', function() {
                 Table: 'react-bootstrap/Table',
                 TabbedArea: 'react-bootstrap/TabbedArea',
                 TabPane: 'react-bootstrap/TabPane',
+                Button: 'react-bootstrap/Button',
                 LineChart: '../LineChart',
                 TotalsTable: '../TotalsTable',
                 BillsTable: '../BillsTable',
+                SetPayed: '../SetPayed',
                 BillsTotals: '../BillsTotals',
                 BillCharts: '../BillCharts',
                 BillsTabs: '../BillsTabs',
+                Status: '../Status',
                 Spinner: '../Spinner'
             }
         }))

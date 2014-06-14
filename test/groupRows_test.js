@@ -27,7 +27,6 @@ describe('groupRows module', function() {
             groupRows.mapToGroupRow.should.be.a('function');
         });
 
-
         it('return groupRows', function() {
             var result = groupRows.mapToGroupRow([1, 2, 3]);
             
@@ -36,8 +35,5 @@ describe('groupRows module', function() {
         });
 
     });
-     
-    
 
-    
 });
