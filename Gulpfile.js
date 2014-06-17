@@ -5,7 +5,7 @@ var loadPlugins = require('gulp-load-plugins');
 var $ = loadPlugins({
     lazy: true
 });
-var gutil = require('gulp-util');
+//var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 
@@ -41,12 +41,12 @@ gulp.task('browserify-test', function() {
         .bundle({
             insertGlobals: true
         });
-    
+    /*
     bundle.on('error',function(err){
         gutil.log(err);
         bundle.end();
     });
-
+*/
     return bundle
         .pipe(source('test.js'))
         .pipe(gulp.dest('web/js'));
