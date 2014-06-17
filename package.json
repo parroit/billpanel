@@ -40,7 +40,9 @@
     "underscore": "^1.6.0",
     "nchart": "^0.1.6",
     "ramda": "^0.1.5",
-    "ngoose": "^0.4.0"
+    "ngoose": "^0.4.0",
+    "promise": "^5.0.0",
+    "validator": "^3.16.0"
   },
   "devDependencies": {
     "gulp": "~3.6.0",
