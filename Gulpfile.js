@@ -41,12 +41,7 @@ gulp.task('browserify-test', function() {
         .bundle({
             insertGlobals: true
         });
-    /*
-    bundle.on('error',function(err){
-        gutil.log(err);
-        bundle.end();
-    });
-*/
+
     return bundle
         .pipe(source('test.js'))
         .pipe(gulp.dest('web/js'));
