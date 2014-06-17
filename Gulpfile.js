@@ -26,7 +26,7 @@ function testMochaPhantom() {
 }
 
 
-gulp.task('test', ['browserify-test'], testMochaPhantom);
+gulp.task('test', ['vendor','jsxify','browserify-test'], testMochaPhantom);
 gulp.task('testMochaPhantom', testMochaPhantom);
 
 
