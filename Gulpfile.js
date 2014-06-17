@@ -25,8 +25,11 @@ function testMochaPhantom() {
         .pipe($.mochaPhantomjs());
 }
 
-
-gulp.task('test', ['vendor','jsxify','browserify-test'], testMochaPhantom);
+gulp.task('test-node',  function () {
+    return gulp.src(['./test/model/**/*.js'], {read: false})
+        .pipe($.mocha({reporter:'spec'}));
+});
+gulp.task('test', ['test-node','vendor','jsxify','browserify-test'], testMochaPhantom);
 gulp.task('testMochaPhantom', testMochaPhantom);
 
 
