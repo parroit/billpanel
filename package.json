@@ -41,8 +41,8 @@
     "nchart": "^0.1.6",
     "ramda": "^0.1.5",
     "ngoose": "^0.4.0",
-    "promise": "^5.0.0",
-    "validator": "^3.16.0"
+    "validator": "^3.16.0",
+    "q": "^1.0.1"
   },
   "devDependencies": {
     "gulp": "~3.6.0",
