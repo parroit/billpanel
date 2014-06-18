@@ -131,4 +131,4 @@ gulp.task('watch-jsxify', function() {
 });
 
 
-gulp.task('serve', ['browserify', 'watch-browserify'], $.serve('web'));
+gulp.task('serve', ['browserify', 'watch-browserify'], $.serve(['web','node_modules']));

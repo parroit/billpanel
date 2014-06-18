@@ -5,7 +5,7 @@ module.exports = {
     language: 'javascript',
     views: {
         articoliIva: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type === 'articoloIva') {
                     emit(doc.codice, doc);
                 }
@@ -13,7 +13,7 @@ module.exports = {
         },
 
         clienti: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type === 'cliente') {
                     emit(doc.codiceFiscale, {
                         _rev: doc._rev,
@@ -28,7 +28,7 @@ module.exports = {
             }
         },
         clienteByCF: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type === 'cliente') {
                     emit(doc.codiceFiscale, doc);
 
@@ -37,7 +37,7 @@ module.exports = {
 
         },
         fattureByYear: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type && doc.type === 'fattura') {
                     emit(doc.anno, {
                         anno: doc.anno,
@@ -54,7 +54,7 @@ module.exports = {
 
         },
         fattureByCode: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type && doc.type === 'fattura') {
                     emit(doc.formattedCode, doc);
 
@@ -63,14 +63,50 @@ module.exports = {
 
         },
         pagamenti: {
-            map: function (doc) {
+            map: function(doc) {
                 if (doc.type === 'pagamento') {
                     emit(doc.description, doc);
 
                 }
             }
 
+        },
+        'list-totals': {
+            map: function(doc) {
+                if (doc.type === 'fattura') {
+                    var total = 0;
+                    doc.righe.forEach(function(r) {
+                        total += r.prezzoCadauno * r.quantita;
+                    });
+
+
+
+                    var d = new Date(doc.date),
+                        currDate = d.getDate(),
+                        currMonth = d.getMonth() + 1,
+                        currYear = d.getFullYear(),
+                        docDate = currDate + '/' + currMonth + '/' + currYear,
+                        trimestre = Math.ceil(currMonth / 3);
+
+
+                    emit(currYear + '-' + trimestre, {
+                        code: doc.formattedCode,
+                        customer: doc.cliente.description,
+                        totale: total,
+                        totaleIvato: total * (100 + doc.articoloIva.percentuale) / 100,
+                        iva: total * (doc.articoloIva.percentuale) / 100,
+                        data: docDate,
+                        articoloIva: doc.articoloIva.percentuale,
+                        pagamento: doc.pagamento.description,
+                        pagamentoGG: doc.pagamento.giorni,
+                        pagamentoFM: doc.pagamento.fineMese,
+                        pagata: doc.pagata,
+                        applicaRitenutaAcconto: doc.applicaRitenutaAcconto,
+                        applicaRivalsaInps: doc.applicaRivalsaInps
+
+                    });
+                }
+            }
         }
     }
-
 };

@@ -61,7 +61,7 @@ describe('model module', function() {
         });
 
         it('return quarter by 1 of firstYear', function() {
-            var result = this.byQuarter2008(exampleData[8] /*date: 25/4/2009*/ );
+            var result = this.byQuarter2008(exampleData[8] );  ///date: 25/4/2009
 
             result.should.be.equal(6);
         });
@@ -84,7 +84,7 @@ describe('model module', function() {
         });
 
         it('return quarter by 1 of firstYear', function() {
-            var result = this.byCustomerQuarter(exampleData[8] /*date: 25/4/2009,customer: 'Digital Studio'*/ );
+            var result = this.byCustomerQuarter(exampleData[8] );  //date: 25/4/2009,customer: 'Digital Studio'
             result.should.be.equal('Digital Studio|6');
         });
 
