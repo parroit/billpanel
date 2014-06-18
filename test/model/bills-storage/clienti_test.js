@@ -10,10 +10,9 @@ var initData = require('./init-db-data'),
 
 
 app.init({
-    couch: {
-        db: 'http://localhost:5984/billy-test'
-    }
+   couch: {  db: 'http://localhost:5984/billy-test' }
 });
+
 describe('clienti', function() {
     before(function(done) {
         initData(done);
@@ -26,21 +25,21 @@ describe('clienti', function() {
         var customers;
         before(function(done) {
             app.clienti.all().then(
-                function success(result) {
+                function (result) {
                     customers = result;
                     done();
-                }, function fail(err) {
-                    throw err;
-                }
+                }, 
+                done
             );
         });
+        
         it('is defined', function() {
             app.clienti.all.should.be.an('function');
         });
 
         it('return all customers', function() {
             customers.should.be.an('array');
-            console.dir(customers);
+            //console.dir(customers);
             customers.length.should.be.equal(1);
             customers[0].partitaIva.should.be.equal('01513860997');
         });
@@ -63,11 +62,8 @@ describe('clienti', function() {
             function success(result) {
                 customer = result;
                 done();
-            }, function fail(err) {
-
-                console.log(err);
-                throw err;
-            }
+            }, 
+            done
         );
     }
 
@@ -82,40 +78,24 @@ describe('clienti', function() {
                     function success(result2) {
                         customer = result2;
                         done();
-                    }, function fail(err) {
-
-                        console.log(err);
-                        throw err;
-                    }
+                    }, done
                 );
-            }, function fail(err) {
-
-                console.log('DELETE:', err);
-                done();
-            }
+            },done
         );
     }
 
     function saveAndRetrieve(code, document, done) {
         app.clienti.save(document).then(
             function success(result) {
-                console.log(result);
+                //console.log(result);
                 app.clienti.byCode(code).then(
                     function success(result2) {
                         customer = result2;
                         done();
-                    }, function fail(err) {
-
-                        //console.log(err);
-                        throw err;
-                    }
+                    }, done
                 );
 
-            }, function fail(err) {
-
-                //console.log(err);
-                throw err;
-            }
+            }, done
         );
     }
 
@@ -158,7 +138,7 @@ describe('clienti', function() {
 
 
             it('return null', function() {
-                customer.should.be.equal(null);
+                should.equal(customer, null);
 
 
             });

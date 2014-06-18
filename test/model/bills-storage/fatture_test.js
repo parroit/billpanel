@@ -4,59 +4,56 @@ var chai = require('chai');
 chai.expect();
 var should = chai.should();
 
-var  initData = require('./init-db-data'),
+var initData = require('./init-db-data'),
 
     app = require('../../../lib/model/bills-storage');
 
 app.init({
-    couch: {db: 'http://localhost:5984/billy-test'}
+    couch: { db: 'http://localhost:5984/billy-test' }
 });
-describe('fatture', function () {
-    before(function(done){
+describe('fatture', function() {
+    before(function(done) {
         initData(done);
     });
 
-    it('is defined', function () {
+    it('is defined', function() {
         app.fatture.should.be.an('object');
     });
 
-    describe('byYear', function () {
+    describe('byYear', function() {
         var bills;
 
-        before(function(done){
+        before(function(done) {
             app.fatture.byYear(new Date().getFullYear()).then(
                 function success(result) {
                     bills = result;
                     //console.dir(bills);
                     done();
-                }, function fail(err) {
-                    //console.dir(err);
-                    throw err;
-                }
+                }, done
             );
         });
 
-        it('is defined', function () {
+        it('is defined', function() {
             app.fatture.byYear.should.be.an('function');
         });
 
-        it('return all bills of year', function () {
+        it('return all bills of year', function() {
             bills.should.be.an('array');
             bills.length.should.be.equal(1);
             bills[0].anno.should.be.equal(new Date().getFullYear());
         });
 
-        it('returned bills has id', function () {
+        it('returned bills has id', function() {
             bills[0]._id.should.be.a('string');
 
         });
 
-        it('returned bills has revision', function () {
+        it('returned bills has revision', function() {
             bills[0]._rev.should.be.a('string');
 
         });
 
-        it('returned bills has cliente', function () {
+        it('returned bills has cliente', function() {
             bills[0].cliente.should.be.a('string');
             bills[0].cliente.should.be.equal('ZSis di Sergio Russo');
 
@@ -71,12 +68,7 @@ describe('fatture', function () {
             function success(result) {
                 bill = result;
                 done();
-            }
-        ).then(null, function fail(err) {
-
-                console.log(err);
-                throw err;
-            }
+            }, done
         );
     }
 
@@ -88,11 +80,9 @@ describe('fatture', function () {
                 function success(result2) {
                     bill = result2;
                     done();
-                }, function fail(err) {
+                },
+                done
 
-                    console.log(err);
-                    done();
-                }
             );
         }
 
@@ -103,14 +93,14 @@ describe('fatture', function () {
             }
         ).then(null, function fail(err) {
 
-                console.log(err);
-                retrieve();
-            });
+            console.log(err);
+            retrieve();
+        });
     }
 
     function saveAndRetrieve(code, document, done) {
-//        console.log('CODE:%s',code);
-//        console.log('DOCUMENT CODE:%s',document.formattedCode);
+        //        console.log('CODE:%s',code);
+        //        console.log('DOCUMENT CODE:%s',document.formattedCode);
         app.fatture.save(document).then(
             function success() {
 
@@ -119,62 +109,58 @@ describe('fatture', function () {
                         console.log(result2);
                         bill = result2;
                         done();
-                    }
-                ).then(null, function (err) {
-                        console.log('%s\n%s', err.message, err.stack);
-                        done();
-                    });
+                    },
+                    done
+                );
 
-            }
-        ).then(null, function (err) {
-                console.log('%s\n%s', err.message, err.stack);
-                done();
-            });
+            },
+            done
+        );
     }
 
-    describe('byCode', function () {
-        it('is defined', function () {
+    describe('byCode', function() {
+        it('is defined', function() {
             app.fatture.byCode.should.be.an('function');
         });
 
 
-        describe(' of existing document', function () {
-            before(function (done) {
+        describe(' of existing document', function() {
+            before(function(done) {
                 loadOne('0001/2008', done);
             });
 
 
-            it('return single bill by code', function () {
+            it('return single bill by code', function() {
                 bill.should.be.an('object');
                 bill.formattedCode.should.be.equal('0001/2008');
 
             });
 
-            it('returned bill has id', function () {
+            it('returned bill has id', function() {
                 bill._id.should.be.a('string');
 
             });
 
-            it('returned bill has type', function () {
+            it('returned bill has type', function() {
                 bill.type.should.be.equal('fattura');
 
             });
 
 
-            it('returned bill has revision', function () {
+            it('returned bill has revision', function() {
                 bill._rev.should.be.a('string');
 
             });
         });
 
-        describe(' of unknown document', function () {
-            before(function (done) {
+        describe(' of unknown document', function() {
+            before(function(done) {
                 loadOne('bad code', done);
             });
 
 
-            it('return null', function () {
-                bill.should.be.equal(null);
+            it('return null', function() {
+                should.equal(bill,null);
 
 
             });
@@ -185,10 +171,10 @@ describe('fatture', function () {
     });
 
 
-    describe('create', function () {
+    describe('create', function() {
 
-        before(function (done) {
-            deleteAndRetrieve('1002/2080', function () {
+        before(function(done) {
+            deleteAndRetrieve('1002/2080', function() {
                 var bill2 = {
                     formattedCode: '1002/2080',
                     description: 'ultima fattura',
@@ -203,7 +189,7 @@ describe('fatture', function () {
         });
 
 
-        it('update document', function () {
+        it('update document', function() {
             bill.description.should.be.equal('ultima fattura');
             bill.formattedCode.should.be.equal('1002/2080');
             bill._id.should.be.a('string');
@@ -213,10 +199,10 @@ describe('fatture', function () {
 
     });
 
-    describe('save', function () {
+    describe('save', function() {
         var original;
 
-        before(function (done) {
+        before(function(done) {
             original = bill.description;
             var bill2 = bill;
             bill = null;
@@ -226,11 +212,11 @@ describe('fatture', function () {
 
 
         });
-        it('is defined', function () {
+        it('is defined', function() {
             app.fatture.save.should.be.an('function');
         });
 
-        it('update document', function () {
+        it('update document', function() {
             bill.description.should.be.equal(original + '*');
 
         });
@@ -238,14 +224,14 @@ describe('fatture', function () {
 
     });
 
-    describe('save multiple times', function () {
+    describe('save multiple times', function() {
 
 
-        before(function (done) {
+        before(function(done) {
             var original = bill;
             original.description = 'ciao1';
 
-            saveAndRetrieve('1002/2080', original, function () {
+            saveAndRetrieve('1002/2080', original, function() {
                 original.description = 'ciao2';
                 saveAndRetrieve('1002/2080', original, done);
 
@@ -255,7 +241,7 @@ describe('fatture', function () {
         });
 
 
-        it('work', function () {
+        it('work', function() {
             bill.description.should.be.equal('ciao2');
 
         });
@@ -263,13 +249,13 @@ describe('fatture', function () {
 
     });
 
-    describe('delete', function () {
-        before(function (done) {
+    describe('delete', function() {
+        before(function(done) {
             deleteAndRetrieve('1002/2080', done);
         });
 
-        it('remove document', function () {
-            should.equal(bill,null);
+        it('remove document', function() {
+            should.equal(bill, null);
 
         });
 

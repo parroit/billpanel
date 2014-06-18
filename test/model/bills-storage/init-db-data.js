@@ -78,6 +78,7 @@ var cliente =  {
 
 couch.init({
     db: 'http://localhost:5984/billy-test'
+    
 });
 
 //console.log('DENTRO');
@@ -146,7 +147,7 @@ var pagamentoPromise  = couch.get('billy','pagamenti').then(function(res){
     });
 
 Q.all([ftPromise,clientePromise,artIvaPromise,pagamentoPromise]).then(function(){
-    //console.log('DONE');
+    console.log('DONE');
     if(doneHandler){
         doneHandler();
         doneHandler = null;

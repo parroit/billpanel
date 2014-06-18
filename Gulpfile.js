@@ -29,6 +29,14 @@ gulp.task('test-node',  function () {
     return gulp.src(['./test/model/**/*.js'], {read: false})
         .pipe($.mocha({reporter:'spec'}));
 });
+
+gulp.task('create-db',  function () {
+    var dbFactory = require('./create_storage/create-db');
+    dbFactory.create('http://localhost:5984/billy-test');
+    
+});
+
+
 gulp.task('test', ['test-node','vendor','jsxify','browserify-test'], testMochaPhantom);
 gulp.task('testMochaPhantom', testMochaPhantom);
 

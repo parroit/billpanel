@@ -133,7 +133,7 @@ describe('AuthStorage', function() {
         it(
             'when it does\'nt match confirmation',
 
-            checkField('password', 'aabbccdd', 'Should match \'Confirm Password')
+            checkField('password', 'aabbccdd', 'Should match "Confirm Password')
         );
 
 
