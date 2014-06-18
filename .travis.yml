@@ -1,6 +1,9 @@
 language: node_js
+services:
+  - couchdb
 node_js:
   - 0.10
 before_script:
   - npm install -g gulp
+  - curl -X PUT localhost:5984/billy-test
   - gulp create-db

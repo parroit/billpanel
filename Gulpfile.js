@@ -37,7 +37,8 @@ gulp.task('create-db',  function () {
 });
 
 
-gulp.task('test', ['test-node','vendor','jsxify','browserify-test'], testMochaPhantom);
+gulp.task('test', ['test-node','test-browser'], testMochaPhantom);
+gulp.task('test-browser', ['vendor','jsxify','browserify-test'], testMochaPhantom);
 gulp.task('testMochaPhantom', testMochaPhantom);
 
 
@@ -48,12 +49,11 @@ gulp.task('browserify-test', function() {
         b.external(lib);
     });
 
-    var bundle = b
+
+    return b
         .bundle({
             insertGlobals: true
-        });
-
-    return bundle
+        })
         .pipe(source('test.js'))
         .pipe(gulp.dest('web/js'));
 });
