@@ -1,12 +1,12 @@
 <tr key={args.code} style={{backgroundColor: args.gravity}}>
-    <td style={{backgroundColor: args.gravity}}>{args.code}</td>
-    <td style={{backgroundColor: args.gravity}} className="date">{args.data.format("DD/MM/YYYY")}</td>
+    <td style={{backgroundColor: args.gravity}}>{args.bill.code}</td>
+    <td style={{backgroundColor: args.bill.gravity}} className="date">{args.bill.data.format("DD/MM/YYYY")}</td>
 
-    <td style={{backgroundColor: args.gravity}}>{args.customer}</td>
-    <td style={{backgroundColor: args.gravity}}>{args.pagamento}</td>
-    <td style={{backgroundColor: args.gravity}} className="date">{args.dueDate.format("DD/MM/YYYY")}</td>
-    <td style={{backgroundColor: args.gravity}}>{args.status}</td>
+    <td style={{backgroundColor: args.bill.gravity}}>{args.bill.customer}</td>
+    <td style={{backgroundColor: args.bill.gravity}}>{args.bill.pagamento}</td>
+    <td style={{backgroundColor: args.bill.gravity}} className="date">{args.bill.dueDate.format("DD/MM/YYYY")}</td>
+    <td style={{backgroundColor: args.bill.gravity}}>{args.bill.status}</td>
 	<td style={{backgroundColor: args.gravity}}>
-		<SetPayed code={args.code}/>
+		<SetPayed  flux={args.flux} code={args.bill.code}/>
 	</td>
 </tr>

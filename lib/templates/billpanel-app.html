@@ -1,8 +1,13 @@
- (args.busy ?
-   <div className="wait-panel">
-   <h4> Loading data, please wait </h4>
-    <Spinner/> 
-    </div> 
+ (args.ok ? 
+
+	 (args.busy ?
+	   <div className="wait-panel">
+	   <h4> Loading data, please wait </h4>
+	    <Spinner/> 
+	    </div> 
+	:
+	    <BillsTabs bills={args.bills} flux={args.flux}/> 
+	)
 :
-    <BillsTabs bills={args.bills}/> 
+	<h1>Error: </h1>	
 )

@@ -1,20 +1,20 @@
 <TabbedArea defaultActiveKey={1}>
     
     <TabPane key={1} tab="Status">
-        <Status bills={args.bills}/>
+        <Status  flux={args.flux} bills={args.bills}/>
     </TabPane>
 
     <TabPane key={2} tab="Totals">
-        <BillsTotals bills={args.bills}/>
+        <BillsTotals  flux={args.flux} bills={args.bills}/>
     </TabPane>
 
     <TabPane key={3} tab="All bills">
-        <BillsTable bills={args.bills}/>
+        <BillsTable  flux={args.flux} bills={args.bills}/>
     </TabPane>
     
     <TabPane key={4} tab="Charts">
 
-        <BillCharts bills={args.bills} />
+        <BillCharts  flux={args.flux} bills={args.bills} />
 
     </TabPane>
 
