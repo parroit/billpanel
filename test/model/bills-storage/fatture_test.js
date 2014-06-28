@@ -106,7 +106,7 @@ describe('fatture', function() {
 
                 app.fatture.byCode(code).then(
                     function success(result2) {
-                        console.log(result2);
+                        //console.log(result2);
                         bill = result2;
                         done();
                     },

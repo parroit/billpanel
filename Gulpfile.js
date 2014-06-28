@@ -37,7 +37,7 @@ gulp.task('create-db',  function () {
 });
 
 
-gulp.task('test', ['test-node','test-browser'], testMochaPhantom);
+gulp.task('test', ['vendor','jsxify','browserify-test','test-node'], testMochaPhantom);
 gulp.task('test-browser', ['vendor','jsxify','browserify-test'], testMochaPhantom);
 gulp.task('testMochaPhantom', testMochaPhantom);
 
