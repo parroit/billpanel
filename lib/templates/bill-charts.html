@@ -1,9 +1,10 @@
 <div>
     <Panel header="Top 5 customer by quarters">
         <Row>
-
+             
             <Col md={10}>
-                <LineChart data={args.top5ByQuarter.data} options={args.optionsTop5ByQuarter} />
+                   
+                     <LineChart data={args.top5ByQuarter.data} options={args.optionsTop5ByQuarter} />
             </Col>
 
 
@@ -22,7 +23,9 @@
         <Row>
 
             <Col md={12}>
-                <LineChart data={args.byQuarter} options={args.optionsByQuarter} />
+                
+                <LineChart data={args.byQuarter.data} options={args.optionsByQuarter} />
+                
             </Col>
 
 
